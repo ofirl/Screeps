@@ -1,4 +1,4 @@
-// creep server object extend
+// storage server object extend
 
 var mod = {
     extend: function () {

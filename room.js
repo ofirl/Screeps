@@ -1,4 +1,4 @@
-// creep server object extend
+// room server object extend
 
 var mod = {
     extend: function () {
