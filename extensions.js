@@ -75,33 +75,43 @@ var mod = {
                 }
             }
         });
-
-        // TODO : add comments
+        
+        // source.container property
         Object.defineProperty(Source.prototype, 'container', {
             configurable: true,
             get: function() {
                 let that = this;
+                // save containers in memory and assign them to sources/minerals
                 if( _.isUndefined(this.memory.container)) {
                     this.room.saveContainers();
                 };
 
+                // if not assigned
                 if( _.isUndefined(this._container) ) {
+                    // search for storage in memory
                     if( this.memory.storage ) {
                         this._container = Game.getObjectById(this.memory.storage);
                         if( !this._container ) delete this.memory.storage;
                     }
+                    // check for terminal in memory
                     else if( this.memory.terminal ) {
                         this._container = Game.getObjectById(this.memory.terminal);
                         if( !this._container ) delete this.memory.terminal;
                     }
+                    // check for container in memory
                     else if( this.memory.container ) {
                         this._container = Game.getObjectById(this.memory.container);
                         if( !this._container ) delete this.memory.container;
-                    } else this._container = null;
+                    }
+                    // nothing found
+                    else
+                        this._container = null;
                 }
                 return this._container;
             }
         });
+
+        // Mineral.memory property
         Object.defineProperty(Mineral.prototype,'memory', {
             configurable: true,
             get: function() {
@@ -123,23 +133,30 @@ var mod = {
                 Memory.minerals[this.id] = value;
             }
         });
+
+        // mineral.container property
         Object.defineProperty(Mineral.prototype, 'container', {
             configurable: true,
             get: function() {
                 let that = this;
+                // save containers in memory and assign them to sources/minerals
                 if( _.isUndefined(this.memory.container)) {
                     this.room.saveContainers();
                 };
 
+                // if not assigned
                 if( _.isUndefined(this._container) ) {
+                    // search for terminal in memory
                     if( this.memory.terminal ) {
                         this._container = Game.getObjectById(this.memory.terminal);
                         if( !this._container ) delete this.memory.terminal;
                     }
+                    // check for storage in memory
                     else if( this.memory.storage ) {
                         this._container = Game.getObjectById(this.memory.storage);
                         if( !this._container ) delete this.memory.storage;
                     }
+                    // check for container in memory
                     else if( this.memory.container ) {
                         this._container = Game.getObjectById(this.memory.container);
                         if( !this._container ) delete this.memory.container;
@@ -148,6 +165,8 @@ var mod = {
                 return this._container;
             }
         });
+
+        //source.link property
         Object.defineProperty(Source.prototype, 'link', {
             configurable: true,
             get: function() {
@@ -160,6 +179,8 @@ var mod = {
                 return this._link;
             }
         });
+
+        // structureController.memory property
         Object.defineProperty(StructureController.prototype, 'memory', {
             configurable: true,
             get: function() {
@@ -181,6 +202,8 @@ var mod = {
                 Memory.controllers[this.id] = value;
             }
         });
+
+        //storage.sum property
         Object.defineProperty(StructureStorage.prototype, 'sum', {
             configurable: true,
             get: function() {
@@ -191,6 +214,8 @@ var mod = {
                 return this._sum;
             }
         });
+
+        // terminal.sum property
         Object.defineProperty(StructureTerminal.prototype, 'sum', {
             configurable: true,
             get: function() {
@@ -201,6 +226,8 @@ var mod = {
                 return this._sum;
             }
         });
+
+        // container.sum property
         Object.defineProperty(StructureContainer.prototype, 'sum', {
             configurable: true,
             get: function() {
